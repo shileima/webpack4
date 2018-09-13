@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Webpack 4 总结</title>
     <script src="./main.js"></script>
 </head>
 <body>
-    <h1>这是生成的 mail.js 文件</h1>
+    <h1>Webpack 4 总结</h1>
+    
+    <p>我们可以将以上探索进行整理总结，首先是注意事项：</p>
+
+    1、webpack-cli必须要全局安装，否则不能使用webpack指令； <br/>
+    2、webpack也必须要全局安装，否则也不能使用webpack指令。 <br/>
+    3、webpack4.x中webpack.config.js这样的配置文件不是必须的。 <br/>
+    4、默认入口文件是./src/index.js，默认输出文件./dist/main.js。<br/>
+
+    <p>配置步骤：</p>
+
+    1、创建工程目录； <br/>
+    2、初始化工程目录：npm init。<br/> 
+    3、全局安装webpack-cli。 <br/>
+    4、全局安装webpack。 <br/>
+    5、webpack –mode development/production进行打包，可在package.json中配置dev和build的脚本，
+    便只需运行npm run dev/build，作用相同。 <br/>
+    6、在webpack –mode development/production可串联设置其他参数。<br/>
 </body>
 </html>

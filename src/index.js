@@ -1,7 +1,7 @@
 function hello(str) {
     alert(str);
 }
-hello('hello world!');
+hello('hello world! webpack 4');
 
 
 /* {总结
