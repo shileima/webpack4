@@ -2,6 +2,12 @@ const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
+/* const MiniCssExtractPlugin = require('mini-css-extract-plugin') */
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const cssExtract = new ExtractTextWebpackPlugin('css/css.css')
+const lessExtract = new ExtractTextWebpackPlugin({
+    filename: 'css/less.css'
+})
 
 // const WebpackManifestPlugin = require('webpack-manifest-plugin')
 // const MinifyPlugin = require("babel-minify-webpack-plugin");
@@ -9,7 +15,7 @@ const webpack = require('webpack')
 module.exports = {
     entry: {
         app: './src/index.js',
-        commen: ['./src/a.js','./src/b.js']
+        //commen: ['./src/a.js','./src/b.js']
     },
     output: {
         filename: '[name]_bundle.[hash:8].js',
@@ -20,6 +26,7 @@ module.exports = {
     devServer: {
         contentBase: './dist',
         compress:true,
+        inline: true,
         port: 8080,
         open: true,
         hot: true
@@ -56,16 +63,44 @@ module.exports = {
         //     //excludeChunks:['commen'],
             
         // }),
+
         // new WebpackManifestPlugin({
         //     fileName: 'my-manifest.json',
         //     // basePath: '/app/',
         //     // publicPath: 'http://cdn.nodejs8.com.cn/',
         // }),
-        // new MinifyPlugin()
+
+        /* new MiniCssExtractPlugin({
+            filename : 'css/css.css'
+        }) */
+
+        // new MinifyPlugin(),
+
+        /* new ExtractTextWebpackPlugin('css/main.css') */
+        lessExtract,
+        cssExtract
     ],
     module: {
         rules: [
-            { test: /\.css$/, use: [ 'style-loader','css-loader' ] },
+            /* { test: /\.css$/, use: [
+                MiniCssExtractPlugin.loader,
+                {loader: 'css-loader'}
+            ] }, 
+            //先执行 css-loader 转换成css 代码；然后 style-loader 将代码插入 style 模块
+            { test: /\.less$/, use: [
+                MiniCssExtractPlugin.loader,
+                {loader: 'css-loader'},
+                {loader: 'less-loader'}
+            ] },   */
+            { test: /\.css$/, use: cssExtract.extract({
+                    use: ['css-loader']
+                })
+             }, 
+            //先执行 css-loader 转换成css 代码；然后 style-loader 将代码插入 style 模块
+            { test: /\.less$/, use: lessExtract.extract({
+                    use: ['css-loader','less-loader']
+                })
+            },   
             { test: /\.(jpg|png|gif|svg|ico)$/, use: [ 'file-loader' ] },
             { test: /\.(woff|woff2|eot|ttf|otf)$/, use: [ 'file-loader' ] },
             { test: /\.(csv|tsv)$/, use: [ 'csv-loader' ] },

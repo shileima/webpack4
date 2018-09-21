@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import './style.css'
+import './style.less'
 import Icon from './favicon.ico'
 // import str from './a'
 let str = require('./a.js')
@@ -23,7 +24,7 @@ function component() {
 //   document.body.innerHTML = '';
 //   document.body.appendChild(component());
 
-  document.getElementById('app').innerHTML = str + 90;
+  document.getElementById('app').innerHTML = str;
 
   // 网页局部热更新
   if(module.hot){
