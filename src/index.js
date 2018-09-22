@@ -10,26 +10,32 @@ if (process.env.NODE_ENV !== 'production') {
     console.log('Looks like we are in development mode!');
 }
 
+// 使用 jquery
+$(function() {
+    console.log('使用 jquery:' + $('#app').html())
+})
+
+
 function component() {
     var element = document.createElement('div');
-  
+
     // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
     element.innerHTML = _.join(['Hello', 'Webpack', 4, '<br/><br/>'], ' ');
-  
+
     var myIcon = new Image()
     myIcon.src = Icon
     element.appendChild(myIcon)
     return element;
-  }
+}
 //   document.body.innerHTML = '';
 //   document.body.appendChild(component());
 
-  document.getElementById('app').innerHTML = str;
+document.getElementById('app').innerHTML = str;
 
-  // 网页局部热更新
-  if(module.hot){
+// 网页局部热更新
+if (module.hot) {
     module.hot.accept()
-  }
+}
 
 /* {总结
 我们可以将以上探索进行整理总结，首先是注意事项：
