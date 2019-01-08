@@ -1,2 +1,2 @@
-module.exports = 'This is export from module A'
+module.exports = 'This is export from module A---'
 console.log('module A')

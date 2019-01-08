@@ -4,6 +4,7 @@ import './style.less'
 import Icon from './favicon.ico'
 // import str from './a'
 let str = require('./a.js')
+import './b'
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -32,10 +33,19 @@ function component() {
 
 document.getElementById('app').innerHTML = str;
 
-// 网页局部热更新
+// 监控此文件引入的所有文件的局部热更新
 if (module.hot) {
     module.hot.accept()
 }
+// 只监控指定文件的局部热更新
+/* if (module.hot) {
+    module.hot.accept(['./a'],() => {
+        console.log("热更新启动了")
+        str = require('./a.js')
+        document.getElementById('app').innerHTML = str;
+
+    })
+} */
 
 /* {总结
 我们可以将以上探索进行整理总结，首先是注意事项：

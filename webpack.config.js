@@ -41,7 +41,10 @@ module.exports = {
         },
         // 会将 process.env.NODE_ENV 的值设为 production ，体积更小
         plugins: [
+            // 使用热替换插件
             new webpack.HotModuleReplacementPlugin(),
+            // 更新时，通知哪个文件更新了...好像加不加都行
+            //new webpack.NamedModulesPlugin,
             new CleanWebpackPlugin(['./dist']),
             /* new CopyWebpackPlugin([{
                 from: './src/doc/*',
